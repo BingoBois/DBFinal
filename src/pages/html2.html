@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        function sendPost() {
+            const element = document.querySelector("#authorName");
+            if (element.value) {
+                const body = {
+                    author: element.value
+                };
+                console.log(`Searching for ${JSON.stringify(body)}`);
+                fetch(`http://localhost:3000/__ææ__/html2`, {method: "POST", body: JSON.stringify(body), headers: {
+                    'Content-Type': 'application/json'
+                }}).then((res) => {
+                    console.log(res);
+                    res.text().then((data) => {
+                        document.open();
+                        document.write(data);
+                        document.close();
+                    });
+                })
+            }
+        }
+    </script>
+    <body>
+        <p>Type in an Author</p>
+        <input type="text" id="authorName" />
+        <br>
+        <br>
+        <button onclick="sendPost()">Plot by Author</button>
+    </body>
+</html>
